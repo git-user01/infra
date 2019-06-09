@@ -1,0 +1,25 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "gcp-lab5",
+      "image_name": "reddit-base-{{timestamp}}",
+      "source_image": "ubuntu-1604-xenial-v20190605",
+      "zone": "europe-west1-d",
+      "ssh_username": "appuser",
+      "machine_type": "f1-micro"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/install_ruby.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/install_mongodb_wout_sudo.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}
